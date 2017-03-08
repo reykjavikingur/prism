@@ -1,8 +1,24 @@
-# Prism
+# Prism - Style Guide Renderer
+
+Prism is an Angular app that reads data files representing style guide examples
+and renders it in a browser with a configurable theme.
+
+## Data Model
+
+The Prism data is a collection of examples.
+Each example has:
+- a unique name
+- a category
+- a description (Markdown file)
+- a source (HTML file)
+
+
+# Angular CLI
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.30.
 
 ## Development server
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
