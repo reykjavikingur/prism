@@ -1,4 +1,8 @@
 <h1>
-  {{title}}
+	Style Guide
 </h1>
 <router-outlet></router-outlet>
+
+<div *ngFor="let example of list">
+	<div>{{example.name}}</div>
+</div>
