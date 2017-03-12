@@ -8,12 +8,14 @@ import {AppComponent} from './app.component';
 import {PrismStoreService} from "./prism-store.service";
 import { ExampleComponent } from './example/example.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryHeaderComponent } from './category-header/category-header.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		ExampleComponent,
-		CategoryListComponent
+		CategoryListComponent,
+		CategoryHeaderComponent
 	],
 	imports: [
 		BrowserModule,
