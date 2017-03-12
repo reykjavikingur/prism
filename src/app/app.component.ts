@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Examples} from "./examples.service";
+import {PrismStoreService} from "./prism-store.service";
 
 @Component({
 	selector: 'prism-root',
@@ -10,13 +10,20 @@ export class AppComponent implements OnInit {
 
 	private list;
 
-	constructor(private examples: Examples) {
+	constructor(private prismStore: PrismStoreService) {
 	}
 
 	public ngOnInit() {
-		this.examples.list.subscribe((r) => {
+
+		this.prismStore.examples.subscribe((r) => {
 			this.list = r;
 		});
+
+		this.loadExamples();
+	}
+
+	private loadExamples() {
+		this.prismStore.initialize();
 	}
 
 }
