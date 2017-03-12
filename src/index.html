@@ -14,21 +14,24 @@
 
 <script type="text/javascript">
 	function onLoad() {
-		prism([
-			{
-				name: 'foo',
-				description: 'The first thing',
-				source: '<div class="foo">foo here</div>'
-			},
-			{
-				name: 'bar',
-				description: 'Another thing'
-			},
-			{
-				name: 'baz',
-				description: 'Something else altogether'
-			}
-		]);
+		prism({
+			title: 'Typical Style Guide',
+			examples: [
+				{
+					name: 'foo',
+					description: 'The first thing',
+					source: '<div class="foo">foo here</div>'
+				},
+				{
+					name: 'bar',
+					description: 'Another thing'
+				},
+				{
+					name: 'baz',
+					description: 'Something else altogether'
+				}
+			]
+		});
 	}
 </script>
 

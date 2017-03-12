@@ -1,10 +1,10 @@
 <main class="prism">
 
-	<h1 class="prism__title">Style Guide</h1>
+	<h1 class="prism__title">{{model.title}}</h1>
 
 	<router-outlet></router-outlet>
 
-	<div *ngFor="let example of list">
+	<div *ngFor="let example of model.examples">
 		<prism-example [example]="example"></prism-example>
 	</div>
 

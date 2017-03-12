@@ -1,36 +1,27 @@
-import {Injectable, Inject} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {prismConfig} from "./prism-config";
 import {BehaviorSubject, Observable} from "rxjs";
-import {Example} from "./example";
+import {PrismModel} from "./prism-model";
 
 @Injectable()
 export class PrismStoreService {
 
-	private subject: BehaviorSubject<Array<Example>>;
+	private subject: BehaviorSubject<PrismModel>;
 
-	private _examples: Observable<Array<Example>>;
+	private _model: Observable<PrismModel>;
 
-	public get examples(): Observable<Array<Example>> {
-		return this._examples;
+	public get model(): Observable<PrismModel> {
+		return this._model;
 	}
 
 	constructor() {
-		this.subject = new BehaviorSubject([]);
-		this._examples = this.subject.asObservable();
+		this.subject = new BehaviorSubject(null);
+		this._model = this.subject.asObservable();
 	}
 
-	public initialize() {
-		let examples = this.parseExamples(prismConfig.data);
-		this.subject.next(examples);
-	}
-
-	private parseExamples(data): Array<Example> {
-		let examples = [];
-		for (let record of data) {
-			let example = new Example(record);
-			examples.push(example);
-		}
-		return examples;
+	public initializeModel() {
+		let model = PrismModel.fromRecord(prismConfig.data);
+		this.subject.next(model);
 	}
 
 }
