@@ -1,0 +1,20 @@
+.prism-example {
+	
+	border: 1px solid #ccc;
+	padding: 1em;
+	margin: auto auto 1em;
+	
+	&__name {
+		margin: 0.1em auto;
+		letter-spacing: 1px;
+	}
+	
+	&__description {
+		font-size: 80%;
+	}
+	
+	&__source {
+		font-family: monospace;
+	}
+	
+}

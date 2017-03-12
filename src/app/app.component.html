@@ -1,8 +1,11 @@
-<h1>
-	Style Guide
-</h1>
-<router-outlet></router-outlet>
+<main class="prism">
 
-<div *ngFor="let example of list">
-	<div>{{example.name}}</div>
-</div>
+	<h1 class="prism__title">Style Guide</h1>
+
+	<router-outlet></router-outlet>
+
+	<div *ngFor="let example of list">
+		<prism-example [example]="example"></prism-example>
+	</div>
+
+</main>

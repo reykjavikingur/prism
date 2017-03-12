@@ -6,10 +6,12 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
 import {PrismStoreService} from "./prism-store.service";
+import { ExampleComponent } from './example/example.component';
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		ExampleComponent
 	],
 	imports: [
 		BrowserModule,
