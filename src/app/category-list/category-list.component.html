@@ -1,0 +1,8 @@
+<div class="prism-category-list">
+	<ul>
+		<li class="prism-category" *ngFor="let category of categories">
+			<span class="prism-category__name" *ngIf="category">{{category}}</span>
+			<span class="prism-category__name prism-category__name--default" *ngIf="!category">Miscellaneous</span>
+		</li>
+	</ul>
+</div>

@@ -4,6 +4,8 @@
 
 	<router-outlet></router-outlet>
 
+	<prism-category-list [categories]="model.categories"></prism-category-list>
+
 	<div *ngFor="let example of model.examples">
 		<prism-example [example]="example"></prism-example>
 	</div>

@@ -1,0 +1,21 @@
+.prism-category-list {
+	
+	display: flex;
+	
+	.prism-category {
+		
+		list-style: none;
+		display: inline-flex;
+		margin: auto 0.25em;
+		
+		&__name {
+			text-decoration: underline;
+			
+			&--default {
+				font-style: italic;
+			}
+			
+		}
+	}
+	
+}
