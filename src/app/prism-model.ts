@@ -5,6 +5,7 @@ export class PrismModel {
 	public static fromRecord(record): PrismModel {
 		let model = new PrismModel();
 		model._title = record.title;
+		model._overview = record.overview;
 		model._examples = record.examples.map((record) => new Example(record));
 		model.initializeCategories();
 		return model;
@@ -13,6 +14,11 @@ export class PrismModel {
 	private _title: String;
 	public get title(): String {
 		return this._title;
+	}
+
+	private _overview: String;
+	public get overview(): String {
+		return this._overview;
 	}
 
 	private _examples: Array<Example>;
