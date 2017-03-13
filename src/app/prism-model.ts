@@ -6,8 +6,26 @@ export class PrismModel {
 		let model = new PrismModel();
 		model._title = record.title;
 		model._overview = record.overview;
-		model._examples = record.examples.map((record) => new Example(record));
-		model.initializeCategories();
+		model._categories = [];
+		model._examples = [];
+		if (record.categories) {
+			for (let categoryRecord of record.categories) {
+				if (categoryRecord) {
+					model._categories.push(categoryRecord.name);
+					if (categoryRecord.examples) {
+						for (let exampleRecord of categoryRecord.examples) {
+							let example = new Example({
+								name: exampleRecord.name,
+								description: exampleRecord.description,
+								source: exampleRecord.source,
+								category: categoryRecord.name
+							});
+							model._examples.push(example);
+						}
+					}
+				}
+			}
+		}
 		return model;
 	}
 
@@ -33,14 +51,6 @@ export class PrismModel {
 
 	constructor() {
 
-	}
-
-	private initializeCategories() {
-		let hash = {};
-		for (let example of this.examples) {
-			hash[example.category] = true;
-		}
-		this._categories = Object.keys(hash);
 	}
 
 }

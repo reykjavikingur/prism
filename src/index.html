@@ -17,24 +17,31 @@
 		prism({
 			title: 'Typical Style Guide',
 			overview: 'This is an fictional style guide for development purposes.',
-			examples: [
+			categories: [
 				{
-					name: 'Foo',
-					category: 'Blocks',
-					description: 'The first thing',
-					source: '<div class="foo">foo here</div>'
+					name: 'Blocks',
+					examples: [
+						{
+							name: 'Foo',
+							description: 'The first thing',
+							source: '<div class="foo">foo here</div>'
+						},
+						{
+							name: 'Bar',
+							description: 'Another thing',
+							source: '<div class="bar"></div>'
+						}
+					]
 				},
 				{
-					name: 'Bar',
-					category: 'Blocks',
-					description: 'Another thing',
-					source: '<div class="bar"></div>'
-				},
-				{
-					name: 'Baz',
-					category: 'Inlines',
-					description: 'Something else altogether',
-					source: '<span class="baz"></span>'
+					name: 'Inlines',
+					examples: [
+						{
+							name: 'Baz',
+							description: 'Something else altogether',
+							source: '<span class="baz"></span>'
+						}
+					]
 				}
 			]
 		});
