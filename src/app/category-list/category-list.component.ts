@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {Subscription} from "rxjs";
 import {PrismStoreService} from "../prism-store.service";
+import {Category} from "../category";
 
 @Component({
 	selector: 'prism-category-list',
@@ -9,7 +10,7 @@ import {PrismStoreService} from "../prism-store.service";
 })
 export class CategoryListComponent implements OnInit, OnDestroy {
 
-	private categories: Array<String>;
+	private categories: Array<Category>;
 
 	private sub: Subscription;
 

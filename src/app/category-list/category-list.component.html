@@ -3,16 +3,18 @@
 
 		<li class="prism-category deselector">
 
-			<a routerLink="/guide">All</a>
+			<a routerLink="/guide/overview"
+			   routerLinkActive="selected"
+			>Overview</a>
 
 		</li>
 
 		<li class="prism-category selector"
 			*ngFor="let category of categories">
 
-			<a routerLink="/guide/category/{{category}}"
+			<a routerLink="/guide/category/{{category.name}}"
 			   routerLinkActive="selected"
-			   *ngIf="category">{{category}}</a>
+			   *ngIf="category">{{category.name}}</a>
 
 		</li>
 	</ul>

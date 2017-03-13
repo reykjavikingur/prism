@@ -3,6 +3,7 @@ import {PrismModel} from "../prism-model";
 import {PrismStoreService} from "../prism-store.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
+import {Category} from "../category";
 
 @Component({
 	selector: 'prism-category',
@@ -17,7 +18,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
 	private paramsSub: Subscription;
 
-	private activeCategory: String;
+	private activeCategoryName: String;
+
+	private activeCategory: Category;
 
 	constructor(private prismStore: PrismStoreService,
 				private route: ActivatedRoute) {
@@ -26,12 +29,13 @@ export class CategoryComponent implements OnInit, OnDestroy {
 	public ngOnInit() {
 
 		this.paramsSub = this.route.params.subscribe(params => {
-			let categoryName = params['categoryName'];
-			this.activeCategory = categoryName;
+			this.activeCategoryName = params['categoryName'];
+			this.updateActiveCategory();
 		});
 
 		this.modelSub = this.prismStore.model.subscribe((value) => {
 			this.model = value;
+			this.updateActiveCategory();
 		});
 
 	}
@@ -39,6 +43,15 @@ export class CategoryComponent implements OnInit, OnDestroy {
 	public ngOnDestroy() {
 		this.paramsSub.unsubscribe();
 		this.modelSub.unsubscribe();
+	}
+
+	private updateActiveCategory() {
+		if (this.model && this.activeCategoryName) {
+			this.activeCategory = this.model.findCategory(this.activeCategoryName);
+		}
+		else {
+			this.activeCategory = null;
+		}
 	}
 
 }

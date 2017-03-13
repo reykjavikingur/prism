@@ -1,13 +1,10 @@
 <div class="prism-category">
 
-	<h2>{{activeCategory}}</h2>
+	<h2>{{activeCategoryName}}</h2>
 
-	<ng-container *ngFor="let example of model.examples">
-
-		<prism-example [example]="example"
-					   *ngIf="example.category === activeCategory"
-		></prism-example>
-
+	<ng-container *ngIf="activeCategory">
+		<prism-example *ngFor="let example of activeCategory.examples"
+					   [example]="example"></prism-example>
 	</ng-container>
 
 </div>

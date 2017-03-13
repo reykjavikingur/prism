@@ -1,4 +1,5 @@
 import {Example} from "./example";
+import {Category} from "./category";
 
 export class PrismModel {
 
@@ -7,22 +8,11 @@ export class PrismModel {
 		model._title = record.title;
 		model._overview = record.overview;
 		model._categories = [];
-		model._examples = [];
 		if (record.categories) {
 			for (let categoryRecord of record.categories) {
 				if (categoryRecord) {
-					model._categories.push(categoryRecord.name);
-					if (categoryRecord.examples) {
-						for (let exampleRecord of categoryRecord.examples) {
-							let example = new Example({
-								name: exampleRecord.name,
-								description: exampleRecord.description,
-								source: exampleRecord.source,
-								category: categoryRecord.name
-							});
-							model._examples.push(example);
-						}
-					}
+					let category = Category.fromRecord(categoryRecord);
+					model._categories.push(category);
 				}
 			}
 		}
@@ -39,18 +29,17 @@ export class PrismModel {
 		return this._overview;
 	}
 
-	private _examples: Array<Example>;
-	public get examples(): Array<Example> {
-		return this._examples;
-	}
-
-	private _categories: Array<String>;
-	public get categories(): Array<String> {
+	private _categories: Array<Category>;
+	public get categories(): Array<Category> {
 		return this._categories;
 	}
 
 	constructor() {
 
+	}
+
+	public findCategory(name: String): Category {
+		return this.categories.find(c => c.name == name);
 	}
 
 }

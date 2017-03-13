@@ -1,5 +1,13 @@
 export class Example {
 
+	public static fromRecord(record): Example {
+		let model = new Example();
+		model.name = record.name;
+		model.description = record.description;
+		model.source = record.source;
+		return model;
+	}
+
 	public name: string;
 
 	public category: string;
@@ -8,11 +16,8 @@ export class Example {
 
 	public source: string;
 
-	constructor(example: any) {
-		this.name = example.name;
-		this.category = example.category;
-		this.description = example.description;
-		this.source = example.source;
+	constructor() {
+
 	}
 
 }
