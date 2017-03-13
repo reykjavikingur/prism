@@ -1,15 +1,33 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {CategoryHeaderComponent} from "./category-header/category-header.component";
+import {StyleGuideComponent} from "./style-guide/style-guide.component";
+import {OverviewComponent} from "./overview/overview.component";
+import {CategoryComponent} from "./category/category.component";
 
 const routes: Routes = [
 	{
 		path: '',
-		children: []
+		pathMatch: 'full',
+		redirectTo: 'guide'
 	},
 	{
-		path: 'category/:categoryName',
-		component: CategoryHeaderComponent
+		path: 'guide',
+		component: StyleGuideComponent,
+		children: [
+			{
+				path: '',
+				pathMatch: 'full',
+				redirectTo: 'overview'
+			},
+			{
+				path: 'overview',
+				component: OverviewComponent
+			},
+			{
+				path: 'category/:categoryName',
+				component: CategoryComponent
+			}
+		]
 	}
 ];
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+// FIXME remove the category header component because it is DEPRECATED
 @Component({
   selector: 'prism-category-header',
   templateUrl: './category-header.component.html',

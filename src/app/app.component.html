@@ -1,13 +1,5 @@
 <main class="prism">
 
-	<h1 class="prism__title">{{model.title}}</h1>
-
-	<prism-category-list [categories]="model.categories"></prism-category-list>
-
 	<router-outlet></router-outlet>
-
-	<div *ngFor="let example of model.examples">
-		<prism-example [example]="example"></prism-example>
-	</div>
 
 </main>
