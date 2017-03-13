@@ -8,7 +8,6 @@ import {AppComponent} from './app.component';
 import {PrismStoreService} from "./prism-store.service";
 import { ExampleComponent } from './example/example.component';
 import { CategoryListComponent } from './category-list/category-list.component';
-import { CategoryHeaderComponent } from './category-header/category-header.component';
 import { StyleGuideComponent } from './style-guide/style-guide.component';
 import { OverviewComponent } from './overview/overview.component';
 import { CategoryComponent } from './category/category.component';
@@ -18,7 +17,6 @@ import { CategoryComponent } from './category/category.component';
 		AppComponent,
 		ExampleComponent,
 		CategoryListComponent,
-		CategoryHeaderComponent,
 		StyleGuideComponent,
 		OverviewComponent,
 		CategoryComponent
