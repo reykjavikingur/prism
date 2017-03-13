@@ -6,11 +6,12 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
 import {PrismStoreService} from "./prism-store.service";
-import { ExampleComponent } from './example/example.component';
-import { CategoryListComponent } from './category-list/category-list.component';
-import { StyleGuideComponent } from './style-guide/style-guide.component';
-import { OverviewComponent } from './overview/overview.component';
-import { CategoryComponent } from './category/category.component';
+import {ExampleComponent} from './example/example.component';
+import {CategoryListComponent} from './category-list/category-list.component';
+import {StyleGuideComponent} from './style-guide/style-guide.component';
+import {OverviewComponent} from './overview/overview.component';
+import {CategoryComponent} from './category/category.component';
+import {SafeUrlPipe} from './safe-url.pipe';
 
 @NgModule({
 	declarations: [
@@ -19,7 +20,8 @@ import { CategoryComponent } from './category/category.component';
 		CategoryListComponent,
 		StyleGuideComponent,
 		OverviewComponent,
-		CategoryComponent
+		CategoryComponent,
+		SafeUrlPipe
 	],
 	imports: [
 		BrowserModule,
