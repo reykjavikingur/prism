@@ -10,8 +10,6 @@ export class Example {
 
 	public name: string;
 
-	public category: string;
-
 	public descriptionUrl: string;
 
 	public sourceUrl: string;
