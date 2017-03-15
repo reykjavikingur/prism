@@ -1,12 +1,11 @@
 .prism-example {
 	
-	border: 1px solid #ccc;
-	padding: 1em;
-	margin: auto auto 1em;
+	margin: 0 auto 1.5em;
 	
 	&__name {
-		margin: 0.1em auto;
-		letter-spacing: 1px;
+		margin: 0 auto;
+		letter-spacing: 0.05em;
+		background-color: #ccc;
 	}
 	
 	&__description {
@@ -15,6 +14,11 @@
 	
 	&__source {
 		font-family: monospace;
+		margin: 1.0em 1.0em;
+		padding: 1.0em;
+		border-width: 1px;
+		border-color: #aaa;
+		border-left-style: dashed;
 	}
 	
 	iframe {
