@@ -1,7 +1,9 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {Example} from "../example";
 import {Http, ResponseContentType, Response} from "@angular/http";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
+import {PrismStoreService} from "../prism-store.service";
+import {PrismModel} from "../prism-model";
 
 @Component({
 	selector: 'prism-example',
@@ -41,15 +43,22 @@ export class ExampleComponent implements OnInit, OnDestroy {
 
 	private source: Observable<Response>;
 
-	constructor(private http: Http) {
+	private model: PrismModel;
+
+	private modelSub: Subscription;
+
+	constructor(private http: Http,
+				private prismStore: PrismStoreService) {
 	}
 
 	ngOnInit() {
-
+		this.modelSub = this.prismStore.model.subscribe(value => {
+			this.model = value;
+		});
 	}
 
 	ngOnDestroy() {
-
+		this.modelSub.unsubscribe();
 	}
 
 }

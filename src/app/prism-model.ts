@@ -8,6 +8,7 @@ export class PrismModel {
 		model._title = record.title;
 		model._overview = record.overview;
 		model._categories = [];
+		model._breakpoints = record.breakpoints;
 		if (record.categories) {
 			for (let categoryRecord of record.categories) {
 				if (categoryRecord) {
@@ -27,6 +28,11 @@ export class PrismModel {
 	private _overview: String;
 	public get overview(): String {
 		return this._overview;
+	}
+
+	private _breakpoints: Array<String>;
+	public get breakpoints(): Array<String> {
+		return this._breakpoints;
 	}
 
 	private _categories: Array<Category>;

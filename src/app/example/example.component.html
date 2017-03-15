@@ -4,9 +4,17 @@
 
 	<div class="prism-example__description" [innerHTML]="description | async | responseText"></div>
 
-	<iframe *ngIf="example.sourceUrl" [src]="example.sourceUrl | safeUrl"
-			width="100%"
-	></iframe>
+	<ng-container *ngIf="example.sourceUrl">
+		<iframe [src]="example.sourceUrl | safeUrl"
+				width="100%"
+		></iframe>
+		<ng-container *ngIf="model.breakpoints">
+			<iframe [src]="example.sourceUrl | safeUrl"
+					*ngFor="let breakpoint of model.breakpoints"
+					[width]="breakpoint"
+			></iframe>
+		</ng-container>
+	</ng-container>
 
 	<div class="prism-example__source">{{source | async | responseText}}</div>
 
