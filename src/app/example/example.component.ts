@@ -15,13 +15,21 @@ export class ExampleComponent implements OnInit, OnDestroy {
 	@Input()
 	public set example(value: Example) {
 		this._example = value;
-		if (value) {
+		if (value && value.descriptionUrl) {
 			this.description = this.http.get(value.descriptionUrl, {
 				responseType: ResponseContentType.Text
 			});
 		}
 		else {
 			this.description = null;
+		}
+		if (value && value.sourceUrl) {
+			this.source = this.http.get(value.sourceUrl, {
+				responseType: ResponseContentType.Text
+			});
+		}
+		else {
+			this.source = null;
 		}
 	}
 
@@ -30,6 +38,8 @@ export class ExampleComponent implements OnInit, OnDestroy {
 	}
 
 	private description: Observable<Response>;
+
+	private source: Observable<Response>;
 
 	constructor(private http: Http) {
 	}

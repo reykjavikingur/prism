@@ -7,5 +7,7 @@
 	<iframe *ngIf="example.sourceUrl" [src]="example.sourceUrl | safeUrl"
 			width="100%"
 	></iframe>
-	
+
+	<div class="prism-example__source">{{source | async | responseText}}</div>
+
 </div>
