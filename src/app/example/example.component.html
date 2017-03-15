@@ -4,6 +4,8 @@
 
 	<div class="prism-example__description" [innerHTML]="description | async | responseText"></div>
 
+	<div class="prism-example__source" [innerHTML]="source | async | responseText | formatMarkup"></div>
+
 	<ng-container *ngIf="example.sourceUrl">
 		<iframe [src]="example.sourceUrl | safeUrl"
 				width="100%"
@@ -15,7 +17,5 @@
 			></iframe>
 		</ng-container>
 	</ng-container>
-
-	<div class="prism-example__source">{{source | async | responseText}}</div>
 
 </div>

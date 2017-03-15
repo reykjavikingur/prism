@@ -13,6 +13,7 @@ import {OverviewComponent} from './overview/overview.component';
 import {CategoryComponent} from './category/category.component';
 import {SafeUrlPipe} from './safe-url.pipe';
 import { ResponseTextPipe } from './response-text.pipe';
+import { FormatMarkupPipe } from './format-markup.pipe';
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,8 @@ import { ResponseTextPipe } from './response-text.pipe';
 		OverviewComponent,
 		CategoryComponent,
 		SafeUrlPipe,
-		ResponseTextPipe
+		ResponseTextPipe,
+		FormatMarkupPipe
 	],
 	imports: [
 		BrowserModule,
