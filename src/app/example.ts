@@ -3,8 +3,8 @@ export class Example {
 	public static fromRecord(record): Example {
 		let model = new Example();
 		model.name = record.name;
-		model.description = record.description;
-		model.source = record.source;
+		model.descriptionUrl = record.descriptionUrl;
+		model.sourceUrl = record.sourceUrl;
 		return model;
 	}
 
@@ -12,9 +12,9 @@ export class Example {
 
 	public category: string;
 
-	public description: string;
+	public descriptionUrl: string;
 
-	public source: string;
+	public sourceUrl: string;
 
 	constructor() {
 

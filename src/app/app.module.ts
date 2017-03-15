@@ -12,6 +12,7 @@ import {StyleGuideComponent} from './style-guide/style-guide.component';
 import {OverviewComponent} from './overview/overview.component';
 import {CategoryComponent} from './category/category.component';
 import {SafeUrlPipe} from './safe-url.pipe';
+import { ResponseTextPipe } from './response-text.pipe';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,8 @@ import {SafeUrlPipe} from './safe-url.pipe';
 		StyleGuideComponent,
 		OverviewComponent,
 		CategoryComponent,
-		SafeUrlPipe
+		SafeUrlPipe,
+		ResponseTextPipe
 	],
 	imports: [
 		BrowserModule,

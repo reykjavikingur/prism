@@ -2,10 +2,10 @@
 
 	<h3 class="prism-example__name">{{example.name}}</h3>
 
-	<div class="prism-example__description" [innerHTML]="example.description"></div>
+	<div class="prism-example__description" [innerHTML]="description | async | responseText"></div>
 
-	<iframe *ngIf="example.source" [src]="example.source | safeUrl"
+	<iframe *ngIf="example.sourceUrl" [src]="example.sourceUrl | safeUrl"
 			width="100%"
 	></iframe>
-
+	
 </div>
