@@ -1,26 +1,5 @@
 .prism-example {
 	
-	margin: 0 auto 1.5em;
-	
-	&__name {
-		margin: 0 auto;
-		letter-spacing: 0.05em;
-		background-color: #ccc;
-	}
-	
-	&__description {
-		font-size: 80%;
-	}
-	
-	&__source {
-		font-family: monospace;
-		margin: 1.0em 1.0em;
-		padding: 1.0em;
-		border-width: 1px;
-		border-color: #aaa;
-		border-left-style: dashed;
-	}
-	
 	iframe {
 		display: inline-block;
 	}

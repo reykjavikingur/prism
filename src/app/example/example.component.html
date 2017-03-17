@@ -1,10 +1,10 @@
 <div class="prism-example" *ngIf="example">
 
-	<h3 class="prism-example__name">{{example.name}}</h3>
+	<h3 class="bg-primary">{{example.name}}</h3>
 
-	<div class="prism-example__description" [innerHTML]="description | async | responseText"></div>
+	<div [innerHTML]="description | async | responseText"></div>
 
-	<div class="prism-example__source" [innerHTML]="source | async | responseText | formatMarkup"></div>
+	<pre [innerHTML]="source | async | responseText | formatMarkup"></pre>
 
 	<ng-container *ngIf="example.sourceUrl">
 		<iframe [src]="example.sourceUrl | safeUrl"
