@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PrismStoreService} from "../prism-store.service";
 import {PrismModel} from "../prism-model";
 import {Subscription} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
 	selector: 'prism-style-guide',
@@ -17,9 +18,11 @@ export class StyleGuideComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnInit() {
+
 		this.modelSub = this.prismStore.model.subscribe((value) => {
 			this.model = value;
 		});
+
 	}
 
 	public ngOnDestroy() {

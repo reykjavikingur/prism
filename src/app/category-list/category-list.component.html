@@ -1,29 +1,23 @@
 <div class="prism-category-list">
 
-	<ul>
-		<li class="prism-category deselector">
-			<a routerLink="/guide/overview"
-			   routerLinkActive="selected"
-			>Overview</a>
-		</li>
-		<li class="prism-category selector"
-			*ngFor="let category of categories">
-			<a routerLink="/guide/category/{{category.name}}"
-			   routerLinkActive="selected"
-			   *ngIf="category">{{category.name}}</a>
-		</li>
-	</ul>
-
 	<div class="btn-group" dropdown>
 		<button id="category-selector-button" type="button" class="btn btn-primary" dropdownToggle>
-			select category <span class="caret"></span>
+			{{activeCategory?.name}}
+			<ng-container *ngIf="!activeCategory">Overview</ng-container>
+			<span class="caret"></span>
 		</button>
 		<ul dropdownMenu role="menu" aria-labelledby="category-selector-button">
-			<li role="menuitem">
-				<a class="dropdown-item" routerLink="/guide/overview">Overview</a>
+			<li role="menuitem"
+				[ngClass]="{'disabled': !activeCategory}"
+			>
+				<a class="dropdown-item"
+				   routerLink="/guide/overview"
+				>Overview</a>
 			</li>
 			<li class="divider dropdown-divider"></li>
-			<li role="menuitem" *ngFor="let category of categories">
+			<li role="menuitem" *ngFor="let category of categories"
+				[ngClass]="{'disabled': category === activeCategory}"
+			>
 				<a class="dropdown-item"
 				   routerLink="/guide/category/{{category.name}}"
 				   *ngIf="category"

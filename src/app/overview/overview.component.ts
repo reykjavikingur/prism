@@ -18,6 +18,7 @@ export class OverviewComponent implements OnInit,OnDestroy {
 	}
 
 	ngOnInit() {
+		this.prismStore.selectCategory(null);
 		this.sub = this.prismStore.model.subscribe(value => {
 			this.model = value;
 		});

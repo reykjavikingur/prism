@@ -13,21 +13,30 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 
 	private categories: Array<Category>;
 
-	private sub: Subscription;
+	private categoriesSub: Subscription;
+
+	private activeCategory: Category;
+
+	private activeCategorySub: Subscription;
 
 	constructor(private prismStore: PrismStoreService) {
 	}
 
 	ngOnInit() {
 
-		this.sub = this.prismStore.model.subscribe(value => {
+		this.categoriesSub = this.prismStore.model.subscribe(value => {
 			this.categories = value.categories;
+		});
+
+		this.activeCategorySub = this.prismStore.activeCategory.subscribe(value => {
+			this.activeCategory = value;
 		});
 
 	}
 
 	ngOnDestroy() {
-		this.sub.unsubscribe();
+		this.categoriesSub.unsubscribe();
+		this.activeCategorySub.unsubscribe();
 	}
 
 }
