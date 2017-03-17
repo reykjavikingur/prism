@@ -12,8 +12,9 @@ import {StyleGuideComponent} from './style-guide/style-guide.component';
 import {OverviewComponent} from './overview/overview.component';
 import {CategoryComponent} from './category/category.component';
 import {SafeUrlPipe} from './safe-url.pipe';
-import { ResponseTextPipe } from './response-text.pipe';
-import { FormatMarkupPipe } from './format-markup.pipe';
+import {ResponseTextPipe} from './response-text.pipe';
+import {FormatMarkupPipe} from './format-markup.pipe';
+import {DropdownModule} from "ng2-bootstrap";
 
 @NgModule({
 	declarations: [
@@ -31,7 +32,8 @@ import { FormatMarkupPipe } from './format-markup.pipe';
 		BrowserModule,
 		FormsModule,
 		HttpModule,
-		AppRoutingModule
+		AppRoutingModule,
+		DropdownModule.forRoot()
 	],
 	providers: [
 		PrismStoreService
