@@ -2,6 +2,7 @@ import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {Subscription} from "rxjs";
 import {PrismStoreService} from "../prism-store.service";
 import {Category} from "../category";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
 	selector: 'prism-category-list',

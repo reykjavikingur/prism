@@ -1,6 +1,6 @@
 <div class="prism-category">
 
-	<h2>{{activeCategoryName}}</h2>
+	<h2>{{activeCategory?.name}}</h2>
 
 	<ng-container *ngIf="activeCategory">
 		<prism-example *ngFor="let example of activeCategory.examples"
