@@ -1,0 +1,20 @@
+<div class="prism-preferences">
+	<div class="btn-group">
+
+		<label class="btn btn-default" btnCheckbox
+			   [(ngModel)]="preferences.showingNotes"
+			   (click)="update()"
+		>Notes</label>
+
+		<label class="btn btn-default" btnCheckbox
+			   [(ngModel)]="preferences.showingSource"
+			   (click)="update()"
+		>Source</label>
+
+		<label class="btn btn-default" btnCheckbox
+			   [(ngModel)]="preferences.showingBreakpoints"
+			   (click)="update()"
+			   >Breakpoints</label>
+
+	</div>
+</div>

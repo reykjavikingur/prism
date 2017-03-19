@@ -3,6 +3,7 @@ import {prismConfig} from "./prism-config";
 import {BehaviorSubject, Observable} from "rxjs";
 import {PrismModel} from "./prism-model";
 import {Category} from "./category";
+import {PrismPreferences} from "./prism-preferences";
 
 @Injectable()
 export class PrismStoreService {
@@ -21,9 +22,17 @@ export class PrismStoreService {
 
 	private activeCategoryName: string;
 
+	public get preferences(): Observable<PrismPreferences> {
+		return this.preferencesSubject.asObservable();
+	}
+
+	private preferencesSubject: BehaviorSubject<PrismPreferences>;
+
 	constructor() {
 		this.modelSubject = new BehaviorSubject(null);
 		this.activeCategorySubject = new BehaviorSubject(null);
+		let defaultPreferences = new PrismPreferences();
+		this.preferencesSubject = new BehaviorSubject(defaultPreferences);
 	}
 
 	public initializeModel() {
@@ -37,6 +46,10 @@ export class PrismStoreService {
 		this.updateActiveCategory();
 	}
 
+	public updatePreferences(value: PrismPreferences) {
+		this.preferencesSubject.next(value);
+	}
+
 	private updateActiveCategory() {
 		let model = this.modelSubject.getValue();
 		if (model) {
@@ -44,5 +57,6 @@ export class PrismStoreService {
 			this.activeCategorySubject.next(category);
 		}
 	}
+
 
 }

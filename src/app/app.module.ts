@@ -14,7 +14,8 @@ import {CategoryComponent} from './category/category.component';
 import {SafeUrlPipe} from './safe-url.pipe';
 import {ResponseTextPipe} from './response-text.pipe';
 import {FormatMarkupPipe} from './format-markup.pipe';
-import {DropdownModule} from "ng2-bootstrap";
+import {DropdownModule, ButtonsModule} from "ng2-bootstrap";
+import { PreferencesComponent } from './preferences/preferences.component';
 
 @NgModule({
 	declarations: [
@@ -26,14 +27,16 @@ import {DropdownModule} from "ng2-bootstrap";
 		CategoryComponent,
 		SafeUrlPipe,
 		ResponseTextPipe,
-		FormatMarkupPipe
+		FormatMarkupPipe,
+		PreferencesComponent
 	],
 	imports: [
 		BrowserModule,
 		FormsModule,
 		HttpModule,
 		AppRoutingModule,
-		DropdownModule.forRoot()
+		DropdownModule.forRoot(),
+		ButtonsModule.forRoot()
 	],
 	providers: [
 		PrismStoreService

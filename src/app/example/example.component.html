@@ -2,15 +2,19 @@
 
 	<h3 class="bg-primary">{{example.name}}</h3>
 
-	<div [innerHTML]="description | async | responseText"></div>
+	<div [innerHTML]="description | async | responseText"
+		 *ngIf="preferences.showingNotes"
+	></div>
 
-	<pre [innerHTML]="source | async | responseText | formatMarkup"></pre>
+	<pre [innerHTML]="source | async | responseText | formatMarkup"
+		 *ngIf="preferences.showingSource"
+	></pre>
 
 	<ng-container *ngIf="example.sourceUrl">
 		<iframe [src]="example.sourceUrl | safeUrl"
 				width="100%"
 		></iframe>
-		<ng-container *ngIf="model.breakpoints">
+		<ng-container *ngIf="model.breakpoints && preferences.showingBreakpoints">
 			<iframe [src]="example.sourceUrl | safeUrl"
 					*ngFor="let breakpoint of model.breakpoints"
 					[width]="breakpoint"
