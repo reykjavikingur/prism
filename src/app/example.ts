@@ -18,4 +18,10 @@ export class Example {
 
 	}
 
+	public matches(q: string): boolean {
+		let substring = q.toLowerCase().trim();
+		let string = this.name.toLowerCase();
+		return (string.indexOf(substring) >= 0);
+	}
+
 }

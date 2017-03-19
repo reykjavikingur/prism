@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {PrismModel} from "./prism-model";
 import {Category} from "./category";
 import {PrismPreferences} from "./prism-preferences";
+import {Example} from "./example";
 
 @Injectable()
 export class PrismStoreService {
@@ -14,19 +15,18 @@ export class PrismStoreService {
 		return this.modelSubject.asObservable();
 	}
 
+	private activeCategoryName: string;
 	private activeCategorySubject: BehaviorSubject<Category>;
 
 	public get activeCategory(): Observable<Category> {
 		return this.activeCategorySubject.asObservable();
 	}
 
-	private activeCategoryName: string;
+	private preferencesSubject: BehaviorSubject<PrismPreferences>;
 
 	public get preferences(): Observable<PrismPreferences> {
 		return this.preferencesSubject.asObservable();
 	}
-
-	private preferencesSubject: BehaviorSubject<PrismPreferences>;
 
 	constructor() {
 		this.modelSubject = new BehaviorSubject(null);
@@ -46,6 +46,24 @@ export class PrismStoreService {
 		this.updateActiveCategory();
 	}
 
+	public search(q: string) {
+		let results = null;
+		if (q) {
+			results = [];
+			for (let category of this.modelSubject.getValue().categories) {
+				for (let example of category.examples) {
+					if (example.matches(q)) {
+						results.push(example);
+					}
+				}
+			}
+		}
+		let c = new Category();
+		c.name = '"' + q + '"';
+		c.examples = results;
+		this.activeCategorySubject.next(c);
+	}
+
 	public updatePreferences(value: PrismPreferences) {
 		this.preferencesSubject.next(value);
 	}
@@ -57,6 +75,5 @@ export class PrismStoreService {
 			this.activeCategorySubject.next(category);
 		}
 	}
-
 
 }

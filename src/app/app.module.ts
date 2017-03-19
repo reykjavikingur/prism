@@ -15,7 +15,8 @@ import {SafeUrlPipe} from './safe-url.pipe';
 import {ResponseTextPipe} from './response-text.pipe';
 import {FormatMarkupPipe} from './format-markup.pipe';
 import {DropdownModule, ButtonsModule} from "ng2-bootstrap";
-import { PreferencesComponent } from './preferences/preferences.component';
+import {PreferencesComponent} from './preferences/preferences.component';
+import {SearchComponent} from './search/search.component';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,8 @@ import { PreferencesComponent } from './preferences/preferences.component';
 		SafeUrlPipe,
 		ResponseTextPipe,
 		FormatMarkupPipe,
-		PreferencesComponent
+		PreferencesComponent,
+		SearchComponent
 	],
 	imports: [
 		BrowserModule,
