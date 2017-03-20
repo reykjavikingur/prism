@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Prism</title>
+	<base href="/">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body onload="onLoad()">
+
+<prism-root>Loading...</prism-root>
+
+<script type="text/javascript">
+	function onLoad() {
+		prism({
+			title: 'Typical Style Guide',
+			overview: 'This is an fictional style guide for development purposes.',
+			breakpoints: ['768', '320'],
+			categories: [
+				{
+					name: 'Blocks',
+					examples: [
+						{
+							name: 'Foo',
+							descriptionUrl: 'assets/test/examples/foo.notes.html',
+							sourceUrl: 'assets/test/examples/foo.html'
+						},
+						{
+							name: 'Bar',
+							descriptionUrl: 'assets/test/examples/bar.notes.html',
+							sourceUrl: 'assets/test/examples/bar.html'
+						}
+					]
+				},
+				{
+					name: 'Inlines',
+					examples: [
+						{
+							name: 'Baz',
+							descriptionUrl: 'assets/test/examples/baz.notes.html',
+							sourceUrl: 'assets/test/examples/baz.html'
+						}
+					]
+				}
+			]
+		});
+	}
+</script>
+
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
