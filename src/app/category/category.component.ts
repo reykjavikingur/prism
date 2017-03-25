@@ -4,6 +4,7 @@ import {PrismStoreService} from "../prism-store.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {Category} from "../category";
+import {Example} from "../example";
 
 @Component({
 	selector: 'prism-category',
@@ -21,6 +22,10 @@ export class CategoryComponent implements OnInit, OnDestroy {
 	private activeCategory: Category;
 
 	private activeCategorySub: Subscription;
+
+	private activeExamples: Array<Example>;
+
+	private activeExamplesSub: Subscription;
 
 	constructor(private prismStore: PrismStoreService,
 				private route: ActivatedRoute) {
@@ -40,12 +45,17 @@ export class CategoryComponent implements OnInit, OnDestroy {
 			this.activeCategory = value;
 		});
 
+		this.activeExamplesSub = this.prismStore.activeExamples.subscribe(value => {
+			this.activeExamples = value;
+		});
+
 	}
 
 	public ngOnDestroy() {
 		this.paramsSub.unsubscribe();
 		this.modelSub.unsubscribe();
 		this.activeCategorySub.unsubscribe();
+		this.activeExamplesSub.unsubscribe();
 	}
 
 }

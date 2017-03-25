@@ -2,8 +2,8 @@
 
 	<h2>{{activeCategory?.name}}</h2>
 
-	<ng-container *ngIf="activeCategory">
-		<prism-example *ngFor="let example of activeCategory.examples"
+	<ng-container *ngIf="activeExamples">
+		<prism-example *ngFor="let example of activeExamples"
 					   [example]="example"></prism-example>
 	</ng-container>
 

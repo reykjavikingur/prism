@@ -22,6 +22,12 @@ export class PrismStoreService {
 		return this.activeCategorySubject.asObservable();
 	}
 
+	private activeExamplesSubject: BehaviorSubject<Array<Example>>;
+
+	public get activeExamples(): Observable<Array<Example>> {
+		return this.activeExamplesSubject.asObservable();
+	}
+
 	private preferencesSubject: BehaviorSubject<PrismPreferences>;
 
 	public get preferences(): Observable<PrismPreferences> {
@@ -31,6 +37,7 @@ export class PrismStoreService {
 	constructor() {
 		this.modelSubject = new BehaviorSubject(null);
 		this.activeCategorySubject = new BehaviorSubject(null);
+		this.activeExamplesSubject = new BehaviorSubject(null);
 		let defaultPreferences = new PrismPreferences();
 		this.preferencesSubject = new BehaviorSubject(defaultPreferences);
 	}
@@ -46,6 +53,7 @@ export class PrismStoreService {
 		this.updateActiveCategory();
 	}
 
+	// FIXME change search to use a filter-based approach like categories
 	public search(q: string) {
 		let results = null;
 		if (q) {
@@ -71,8 +79,12 @@ export class PrismStoreService {
 	private updateActiveCategory() {
 		let model = this.modelSubject.getValue();
 		if (model) {
-			let category = model.findCategory(this.activeCategoryName);
+			let category = model.findCategoryByName(this.activeCategoryName);
 			this.activeCategorySubject.next(category);
+			if (category) {
+				let examples = model.findExamplesByCategory(category);
+				this.activeExamplesSubject.next(examples);
+			}
 		}
 	}
 

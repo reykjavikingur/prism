@@ -1,3 +1,5 @@
+import {Category} from "./category";
+
 export class Example {
 
 	public static fromRecord(record): Example {
@@ -13,6 +15,8 @@ export class Example {
 	public descriptionUrl: string;
 
 	public sourceUrl: string;
+
+	public category: Category;
 
 	constructor() {
 

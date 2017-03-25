@@ -19,6 +19,7 @@ export class Category {
 
 	name: String;
 
+	// FIXME remove this in favor of Example#category
 	examples: Array<Example>;
 
 }
