@@ -1,6 +1,13 @@
-<div class="search">
-	Search:
-	<input type="text" [(ngModel)]="searchQuery"
-		   (change)="doSearch()"
-	/>
+<div class="prism-search">
+	<div class="input-group">
+	<span class="input-group-btn">
+		<button class="btn btn-default">Go</button>
+	</span>
+		<input type="text"
+			   class="form-control"
+			   placeholder="Search..."
+			   [(ngModel)]="searchQuery"
+			   (change)="doSearch()"
+		/>
+	</div>
 </div>
