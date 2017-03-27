@@ -1,25 +1,21 @@
 import {Example} from "./example";
+import {ExampleFilter} from "./example-filter";
 
-export class Category {
+export class Category implements ExampleFilter {
 
 	public static fromRecord(record): Category {
 		let model = new Category();
-		model.name = record.name;
-		model.examples = [];
-		if (record.examples) {
-			for (let exampleRecord of record.examples) {
-				if (exampleRecord) {
-					let example = Example.fromRecord(exampleRecord);
-					model.examples.push(example);
-				}
-			}
-		}
+		model._name = record.name;
 		return model;
 	}
 
-	name: String;
+	private _name: String;
+	public get name(): String {
+		return this._name;
+	}
 
-	// FIXME remove this in favor of Example#category
-	examples: Array<Example>;
+	public includes(example: Example): boolean {
+		return example.category.name === this.name;
+	}
 
 }

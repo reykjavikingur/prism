@@ -55,21 +55,7 @@ export class PrismStoreService {
 
 	// FIXME change search to use a filter-based approach like categories
 	public search(q: string) {
-		let results = null;
-		if (q) {
-			results = [];
-			for (let category of this.modelSubject.getValue().categories) {
-				for (let example of category.examples) {
-					if (example.matches(q)) {
-						results.push(example);
-					}
-				}
-			}
-		}
-		let c = new Category();
-		c.name = '"' + q + '"';
-		c.examples = results;
-		this.activeCategorySubject.next(c);
+
 	}
 
 	public updatePreferences(value: PrismPreferences) {
@@ -82,6 +68,7 @@ export class PrismStoreService {
 			let category = model.findCategoryByName(this.activeCategoryName);
 			this.activeCategorySubject.next(category);
 			if (category) {
+				// FIXME use model.findExamples
 				let examples = model.findExamplesByCategory(category);
 				this.activeExamplesSubject.next(examples);
 			}
