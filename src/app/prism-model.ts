@@ -66,11 +66,4 @@ export class PrismModel {
 		return this.examples.filter(example => filter.includes(example));
 	}
 
-	// FIXME remove this
-	public findExamplesByCategory(category: Category): Array<Example> {
-		return this.examples.filter((example) => {
-			return example.category.name === category.name;
-		});
-	}
-
 }

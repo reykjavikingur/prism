@@ -5,74 +5,86 @@ import {PrismModel} from "./prism-model";
 import {Category} from "./category";
 import {PrismPreferences} from "./prism-preferences";
 import {Example} from "./example";
+import {Search} from "./search";
+import {ExampleFilter} from "./example-filter";
 
 @Injectable()
 export class PrismStoreService {
 
-	private modelSubject: BehaviorSubject<PrismModel>;
+	private _model: BehaviorSubject<PrismModel>;
 
 	public get model(): Observable<PrismModel> {
-		return this.modelSubject.asObservable();
+		return this._model;
 	}
 
-	private activeCategoryName: string;
-	private activeCategorySubject: BehaviorSubject<Category>;
-
+	private _activeCategory: BehaviorSubject<Category>;
 	public get activeCategory(): Observable<Category> {
-		return this.activeCategorySubject.asObservable();
+		return this._activeCategory;
 	}
 
-	private activeExamplesSubject: BehaviorSubject<Array<Example>>;
+	private _activeSearch: BehaviorSubject<Search>;
+	public get activeSearch(): Observable<Search> {
+		return this._activeSearch;
+	}
 
+	private _activeFilter: BehaviorSubject<ExampleFilter>;
+	public get activeFilter(): Observable<ExampleFilter> {
+		return this._activeFilter;
+	}
+
+	private _activeExamples: BehaviorSubject<Array<Example>>;
 	public get activeExamples(): Observable<Array<Example>> {
-		return this.activeExamplesSubject.asObservable();
+		return this._activeExamples;
 	}
 
-	private preferencesSubject: BehaviorSubject<PrismPreferences>;
-
+	private _preferences: BehaviorSubject<PrismPreferences>;
 	public get preferences(): Observable<PrismPreferences> {
-		return this.preferencesSubject.asObservable();
+		return this._preferences;
 	}
 
 	constructor() {
-		this.modelSubject = new BehaviorSubject(null);
-		this.activeCategorySubject = new BehaviorSubject(null);
-		this.activeExamplesSubject = new BehaviorSubject(null);
+		this._model = new BehaviorSubject(null);
+		this._activeCategory = new BehaviorSubject(null);
+		this._activeSearch = new BehaviorSubject(null);
+		this._activeFilter = new BehaviorSubject(null);
+		this._activeExamples = new BehaviorSubject(null);
 		let defaultPreferences = new PrismPreferences();
-		this.preferencesSubject = new BehaviorSubject(defaultPreferences);
+		this._preferences = new BehaviorSubject(defaultPreferences);
 	}
 
 	public initializeModel() {
 		let model = PrismModel.fromRecord(prismConfig.data);
-		this.modelSubject.next(model);
-		this.updateActiveCategory();
+		this._model.next(model);
+	}
+
+	public reset() {
+		this._activeCategory.next(null);
+		this._activeSearch.next(null);
+		this._activeFilter.next(null);
 	}
 
 	public selectCategory(name: string) {
-		this.activeCategoryName = name;
-		this.updateActiveCategory();
+		let category = this._model.getValue().findCategoryByName(name);
+		this._activeCategory.next(category);
+		this.updateActiveExamples(category);
+		this._activeSearch.next(null);
 	}
 
-	// FIXME change search to use a filter-based approach like categories
 	public search(q: string) {
-
+		let search = new Search(q);
+		this._activeSearch.next(search);
+		this.updateActiveExamples(search);
+		this._activeCategory.next(null);
 	}
 
 	public updatePreferences(value: PrismPreferences) {
-		this.preferencesSubject.next(value);
+		this._preferences.next(value);
 	}
 
-	private updateActiveCategory() {
-		let model = this.modelSubject.getValue();
-		if (model) {
-			let category = model.findCategoryByName(this.activeCategoryName);
-			this.activeCategorySubject.next(category);
-			if (category) {
-				// FIXME use model.findExamples
-				let examples = model.findExamplesByCategory(category);
-				this.activeExamplesSubject.next(examples);
-			}
-		}
+	private updateActiveExamples(filter: ExampleFilter) {
+		let examples = this._model.getValue().findExamples(filter);
+		this._activeExamples.next(examples);
+		this._activeFilter.next(filter);
 	}
 
 }
