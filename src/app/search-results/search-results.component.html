@@ -1,0 +1,10 @@
+<div class="prism-search-results">
+
+	<h2>Searching for &quot;{{query | async}}&quot;</h2>
+
+	<ng-container *ngIf="examples | async">
+		<prism-example *ngFor="let example of examples | async"
+					   [example]="example"></prism-example>
+	</ng-container>
+
+</div>

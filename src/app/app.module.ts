@@ -17,6 +17,7 @@ import {FormatMarkupPipe} from './format-markup.pipe';
 import {DropdownModule, ButtonsModule} from "ng2-bootstrap";
 import {PreferencesComponent} from './preferences/preferences.component';
 import {SearchComponent} from './search/search.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 @NgModule({
 	declarations: [
@@ -30,7 +31,8 @@ import {SearchComponent} from './search/search.component';
 		ResponseTextPipe,
 		FormatMarkupPipe,
 		PreferencesComponent,
-		SearchComponent
+		SearchComponent,
+		SearchResultsComponent
 	],
 	imports: [
 		BrowserModule,

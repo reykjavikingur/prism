@@ -1,5 +1,6 @@
 import {ExampleFilter} from "./example-filter";
 import {Example} from "./example";
+
 export class Search implements ExampleFilter {
 
 	constructor(query: string) {
