@@ -15,10 +15,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
 	private paramsSub: Subscription;
 
-	private model: PrismModel;
-
-	private modelSub: Subscription;
-
 	private activeCategory: Category;
 
 	private activeCategorySub: Subscription;
@@ -37,10 +33,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
 			this.prismStore.selectCategory(params['categoryName']);
 		});
 
-		this.modelSub = this.prismStore.model.subscribe((value) => {
-			this.model = value;
-		});
-
 		this.activeCategorySub = this.prismStore.activeCategory.subscribe(value => {
 			this.activeCategory = value;
 		});
@@ -53,7 +45,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
 	public ngOnDestroy() {
 		this.paramsSub.unsubscribe();
-		this.modelSub.unsubscribe();
 		this.activeCategorySub.unsubscribe();
 		this.activeExamplesSub.unsubscribe();
 	}
