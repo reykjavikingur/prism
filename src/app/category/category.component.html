@@ -1,9 +1,9 @@
 <div class="prism-category">
 
-	<h2>{{activeCategory?.name}}</h2>
+	<h2>{{activeCategoryName | async}}</h2>
 
-	<ng-container *ngIf="activeExamples">
-		<prism-example *ngFor="let example of activeExamples"
+	<ng-container *ngIf="activeExamples | async">
+		<prism-example *ngFor="let example of activeExamples | async"
 					   [example]="example"></prism-example>
 	</ng-container>
 

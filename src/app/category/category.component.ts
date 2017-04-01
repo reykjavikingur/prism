@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PrismModel} from "../prism-model";
 import {PrismStoreService} from "../prism-store.service";
 import {ActivatedRoute} from "@angular/router";
-import {Subscription} from "rxjs";
+import {Subscription, Observable} from "rxjs";
 import {Category} from "../category";
 import {Example} from "../example";
 
@@ -15,38 +15,30 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
 	private paramsSub: Subscription;
 
-	private activeCategory: Category;
+	private activeCategory: Observable<Category>;
 
-	private activeCategorySub: Subscription;
+	private activeCategoryName: Observable<String>;
 
-	private activeExamples: Array<Example>;
-
-	private activeExamplesSub: Subscription;
+	private activeExamples: Observable<Array<Example>>;
 
 	constructor(private prismStore: PrismStoreService,
 				private route: ActivatedRoute) {
+		this.activeCategory = this.prismStore.activeCategory;
+		this.activeExamples = this.prismStore.activeExamples;
+
+		this.activeCategoryName = this.activeCategory.map(value => {
+			return value.name;
+		});
 	}
 
 	public ngOnInit() {
-
 		this.paramsSub = this.route.params.subscribe(params => {
 			this.prismStore.selectCategory(params['categoryName']);
 		});
-
-		this.activeCategorySub = this.prismStore.activeCategory.subscribe(value => {
-			this.activeCategory = value;
-		});
-
-		this.activeExamplesSub = this.prismStore.activeExamples.subscribe(value => {
-			this.activeExamples = value;
-		});
-
 	}
 
 	public ngOnDestroy() {
 		this.paramsSub.unsubscribe();
-		this.activeCategorySub.unsubscribe();
-		this.activeExamplesSub.unsubscribe();
 	}
 
 }
