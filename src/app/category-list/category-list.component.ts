@@ -3,6 +3,7 @@ import {Subscription} from "rxjs";
 import {PrismStoreService} from "../prism-store.service";
 import {Category} from "../category";
 import {ActivatedRoute} from "@angular/router";
+import {Search} from "../search";
 
 @Component({
 	selector: 'prism-category-list',
@@ -19,6 +20,10 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 
 	private activeCategorySub: Subscription;
 
+	private activeSearch: Search;
+
+	private activeSearchSub: Subscription;
+
 	constructor(private prismStore: PrismStoreService) {
 	}
 
@@ -32,11 +37,16 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 			this.activeCategory = value;
 		});
 
+		this.activeSearchSub = this.prismStore.activeSearch.subscribe(value => {
+			this.activeSearch = value;
+		});
+
 	}
 
 	ngOnDestroy() {
 		this.categoriesSub.unsubscribe();
 		this.activeCategorySub.unsubscribe();
+		this.activeSearchSub.unsubscribe();
 	}
 
 }

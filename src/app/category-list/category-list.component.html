@@ -2,8 +2,9 @@
 
 	<div class="btn-group" dropdown>
 		<button id="category-selector-button" type="button" class="btn btn-primary" dropdownToggle>
-			{{activeCategory?.name}}
-			<ng-container *ngIf="!activeCategory">Overview</ng-container>
+			<ng-container *ngIf="activeCategory">{{activeCategory.name}}</ng-container>
+			<ng-container *ngIf="activeSearch">&quot;{{activeSearch.query}}&quot;</ng-container>
+			<ng-container *ngIf="!activeCategory && !activeSearch">Overview</ng-container>
 			<span class="caret"></span>
 		</button>
 		<ul dropdownMenu role="menu" aria-labelledby="category-selector-button">
