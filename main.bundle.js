@@ -1,6 +1,6 @@
 webpackJsonp([1,4],{
 
-/***/ 1222:
+/***/ 1226:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(635);
@@ -12,40 +12,9 @@ module.exports = __webpack_require__(635);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__example__ = __webpack_require__(396);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Category; });
-
-var Category = (function () {
-    function Category() {
-    }
-    Category.fromRecord = function (record) {
-        var model = new Category();
-        model.name = record.name;
-        model.examples = [];
-        if (record.examples) {
-            for (var _i = 0, _a = record.examples; _i < _a.length; _i++) {
-                var exampleRecord = _a[_i];
-                if (exampleRecord) {
-                    var example = __WEBPACK_IMPORTED_MODULE_0__example__["a" /* Example */].fromRecord(exampleRecord);
-                    model.examples.push(example);
-                }
-            }
-        }
-        return model;
-    };
-    return Category;
-}());
-//# sourceMappingURL=/Users/astrader/ProjectCode/prototypes/prism/src/category.js.map
-
-/***/ }),
-
-/***/ 395:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(176);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -63,29 +32,26 @@ var CategoryComponent = (function () {
     function CategoryComponent(prismStore, route) {
         this.prismStore = prismStore;
         this.route = route;
+        this.activeCategory = this.prismStore.activeCategory;
+        this.activeExamples = this.prismStore.activeExamples;
+        this.activeCategoryName = this.activeCategory.map(function (value) {
+            return value.name;
+        });
     }
     CategoryComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.paramsSub = this.route.params.subscribe(function (params) {
             _this.prismStore.selectCategory(params['categoryName']);
         });
-        this.modelSub = this.prismStore.model.subscribe(function (value) {
-            _this.model = value;
-        });
-        this.activeCategorySub = this.prismStore.activeCategory.subscribe(function (value) {
-            _this.activeCategory = value;
-        });
     };
     CategoryComponent.prototype.ngOnDestroy = function () {
         this.paramsSub.unsubscribe();
-        this.modelSub.unsubscribe();
-        this.activeCategorySub.unsubscribe();
     };
     CategoryComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
             selector: 'prism-category',
-            template: __webpack_require__(952),
-            styles: [__webpack_require__(944)]
+            template: __webpack_require__(955),
+            styles: [__webpack_require__(946)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === 'function' && _b) || Object])
     ], CategoryComponent);
@@ -96,7 +62,7 @@ var CategoryComponent = (function () {
 
 /***/ }),
 
-/***/ 396:
+/***/ 395:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -111,23 +77,18 @@ var Example = (function () {
         model.sourceUrl = record.sourceUrl;
         return model;
     };
-    Example.prototype.matches = function (q) {
-        var substring = q.toLowerCase().trim();
-        var string = this.name.toLowerCase();
-        return (string.indexOf(substring) >= 0);
-    };
     return Example;
 }());
 //# sourceMappingURL=/Users/astrader/ProjectCode/prototypes/prism/src/example.js.map
 
 /***/ }),
 
-/***/ 397:
+/***/ 396:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(50);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OverviewComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -146,7 +107,7 @@ var OverviewComponent = (function () {
     }
     OverviewComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.prismStore.selectCategory(null);
+        this.prismStore.reset();
         this.sub = this.prismStore.model.subscribe(function (value) {
             _this.model = value;
         });
@@ -157,8 +118,8 @@ var OverviewComponent = (function () {
     OverviewComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
             selector: 'prism-overview',
-            template: __webpack_require__(954),
-            styles: [__webpack_require__(946)]
+            template: __webpack_require__(957),
+            styles: [__webpack_require__(948)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _a) || Object])
     ], OverviewComponent);
@@ -169,7 +130,7 @@ var OverviewComponent = (function () {
 
 /***/ }),
 
-/***/ 398:
+/***/ 397:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -181,12 +142,63 @@ var prismConfig;
 
 /***/ }),
 
+/***/ 398:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__prism_store_service__ = __webpack_require__(50);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchResultsComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SearchResultsComponent = (function () {
+    function SearchResultsComponent(route, prismStore) {
+        this.route = route;
+        this.prismStore = prismStore;
+        this.examples = this.prismStore.activeExamples;
+        this.query = this.prismStore.activeSearch.map(function (value) { return value.query; });
+    }
+    SearchResultsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.paramSub = this.route.params.subscribe(function (params) {
+            _this.prismStore.search(params['query']);
+        });
+    };
+    SearchResultsComponent.prototype.ngOnDestroy = function () {
+        this.paramSub.unsubscribe();
+    };
+    SearchResultsComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
+            selector: 'prism-search-results',
+            template: __webpack_require__(959),
+            styles: [__webpack_require__(950)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _b) || Object])
+    ], SearchResultsComponent);
+    return SearchResultsComponent;
+    var _a, _b;
+}());
+//# sourceMappingURL=/Users/astrader/ProjectCode/prototypes/prism/src/search-results.component.js.map
+
+/***/ }),
+
 /***/ 399:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(50);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StyleGuideComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -215,8 +227,8 @@ var StyleGuideComponent = (function () {
     StyleGuideComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
             selector: 'prism-style-guide',
-            template: __webpack_require__(957),
-            styles: [__webpack_require__(949)]
+            template: __webpack_require__(961),
+            styles: [__webpack_require__(952)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _a) || Object])
     ], StyleGuideComponent);
@@ -227,17 +239,17 @@ var StyleGuideComponent = (function () {
 
 /***/ }),
 
-/***/ 53:
+/***/ 50:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_config__ = __webpack_require__(398);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(959);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_config__ = __webpack_require__(397);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(963);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__prism_model__ = __webpack_require__(759);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category__ = __webpack_require__(394);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__prism_preferences__ = __webpack_require__(760);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__prism_model__ = __webpack_require__(760);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__prism_preferences__ = __webpack_require__(761);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search__ = __webpack_require__(764);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PrismStoreService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -256,69 +268,84 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var PrismStoreService = (function () {
     function PrismStoreService() {
-        this.modelSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
-        this.activeCategorySubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
-        var defaultPreferences = new __WEBPACK_IMPORTED_MODULE_5__prism_preferences__["a" /* PrismPreferences */]();
-        this.preferencesSubject = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](defaultPreferences);
+        this._model = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
+        this._activeCategory = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
+        this._activeSearch = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
+        this._activeFilter = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
+        this._activeExamples = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
+        var defaultPreferences = new __WEBPACK_IMPORTED_MODULE_4__prism_preferences__["a" /* PrismPreferences */]();
+        this._preferences = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](defaultPreferences);
     }
     Object.defineProperty(PrismStoreService.prototype, "model", {
         get: function () {
-            return this.modelSubject.asObservable();
+            return this._model;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(PrismStoreService.prototype, "activeCategory", {
         get: function () {
-            return this.activeCategorySubject.asObservable();
+            return this._activeCategory;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PrismStoreService.prototype, "activeSearch", {
+        get: function () {
+            return this._activeSearch;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PrismStoreService.prototype, "activeFilter", {
+        get: function () {
+            return this._activeFilter;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PrismStoreService.prototype, "activeExamples", {
+        get: function () {
+            return this._activeExamples;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(PrismStoreService.prototype, "preferences", {
         get: function () {
-            return this.preferencesSubject.asObservable();
+            return this._preferences;
         },
         enumerable: true,
         configurable: true
     });
     PrismStoreService.prototype.initializeModel = function () {
         var model = __WEBPACK_IMPORTED_MODULE_3__prism_model__["a" /* PrismModel */].fromRecord(__WEBPACK_IMPORTED_MODULE_1__prism_config__["a" /* prismConfig */].data);
-        this.modelSubject.next(model);
-        this.updateActiveCategory();
+        this._model.next(model);
+    };
+    PrismStoreService.prototype.reset = function () {
+        this._activeCategory.next(null);
+        this._activeSearch.next(null);
+        this._activeFilter.next(null);
     };
     PrismStoreService.prototype.selectCategory = function (name) {
-        this.activeCategoryName = name;
-        this.updateActiveCategory();
+        var category = this._model.getValue().findCategoryByName(name);
+        this._activeCategory.next(category);
+        this.updateActiveExamples(category);
+        this._activeSearch.next(null);
     };
     PrismStoreService.prototype.search = function (q) {
-        var results = null;
-        if (q) {
-            results = [];
-            for (var _i = 0, _a = this.modelSubject.getValue().categories; _i < _a.length; _i++) {
-                var category = _a[_i];
-                for (var _b = 0, _c = category.examples; _b < _c.length; _b++) {
-                    var example = _c[_b];
-                    if (example.matches(q)) {
-                        results.push(example);
-                    }
-                }
-            }
-        }
-        var c = new __WEBPACK_IMPORTED_MODULE_4__category__["a" /* Category */]();
-        c.name = '"' + q + '"';
-        c.examples = results;
-        this.activeCategorySubject.next(c);
+        var search = new __WEBPACK_IMPORTED_MODULE_5__search__["a" /* Search */](q);
+        this._activeSearch.next(search);
+        this.updateActiveExamples(search);
+        this._activeCategory.next(null);
     };
     PrismStoreService.prototype.updatePreferences = function (value) {
-        this.preferencesSubject.next(value);
+        this._preferences.next(value);
     };
-    PrismStoreService.prototype.updateActiveCategory = function () {
-        var model = this.modelSubject.getValue();
-        if (model) {
-            var category = model.findCategory(this.activeCategoryName);
-            this.activeCategorySubject.next(category);
-        }
+    PrismStoreService.prototype.updateActiveExamples = function (filter) {
+        var examples = this._model.getValue().findExamples(filter);
+        this._activeExamples.next(examples);
+        this._activeFilter.next(filter);
     };
     PrismStoreService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(), 
@@ -351,9 +378,9 @@ webpackEmptyContext.id = 634;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(722);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(764);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(766);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_module__ = __webpack_require__(754);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_prism_config__ = __webpack_require__(398);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_prism_config__ = __webpack_require__(397);
 
 
 
@@ -376,10 +403,11 @@ function prism(data) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__style_guide_style_guide_component__ = __webpack_require__(399);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__overview_overview_component__ = __webpack_require__(397);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_category_component__ = __webpack_require__(395);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__overview_overview_component__ = __webpack_require__(396);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__category_category_component__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__search_results_search_results_component__ = __webpack_require__(398);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -390,6 +418,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -417,6 +446,10 @@ var routes = [
             {
                 path: 'category/:categoryName',
                 component: __WEBPACK_IMPORTED_MODULE_4__category_category_component__["a" /* CategoryComponent */]
+            },
+            {
+                path: 'search/:query',
+                component: __WEBPACK_IMPORTED_MODULE_5__search_results_search_results_component__["a" /* SearchResultsComponent */]
             }
         ]
     }
@@ -445,7 +478,7 @@ var AppRoutingModule = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(50);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -468,8 +501,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
             selector: 'prism-root',
-            template: __webpack_require__(950),
-            styles: [__webpack_require__(942)]
+            template: __webpack_require__(953),
+            styles: [__webpack_require__(944)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _a) || Object])
     ], AppComponent);
@@ -487,21 +520,22 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(123);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(370);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(371);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routing_module__ = __webpack_require__(752);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(753);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__prism_store_service__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__example_example_component__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__prism_store_service__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__example_example_component__ = __webpack_require__(757);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__category_list_category_list_component__ = __webpack_require__(755);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__style_guide_style_guide_component__ = __webpack_require__(399);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__overview_overview_component__ = __webpack_require__(397);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__category_category_component__ = __webpack_require__(395);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__safe_url_pipe__ = __webpack_require__(762);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__response_text_pipe__ = __webpack_require__(761);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__format_markup_pipe__ = __webpack_require__(757);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_bootstrap__ = __webpack_require__(926);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__preferences_preferences_component__ = __webpack_require__(758);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__search_search_component__ = __webpack_require__(763);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__overview_overview_component__ = __webpack_require__(396);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__category_category_component__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__safe_url_pipe__ = __webpack_require__(763);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__response_text_pipe__ = __webpack_require__(762);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__format_markup_pipe__ = __webpack_require__(758);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_bootstrap__ = __webpack_require__(928);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__preferences_preferences_component__ = __webpack_require__(759);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__search_search_component__ = __webpack_require__(765);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__search_results_search_results_component__ = __webpack_require__(398);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -512,6 +546,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -546,7 +581,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_13__response_text_pipe__["a" /* ResponseTextPipe */],
                 __WEBPACK_IMPORTED_MODULE_14__format_markup_pipe__["a" /* FormatMarkupPipe */],
                 __WEBPACK_IMPORTED_MODULE_16__preferences_preferences_component__["a" /* PreferencesComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__search_search_component__["a" /* SearchComponent */]
+                __WEBPACK_IMPORTED_MODULE_17__search_search_component__["a" /* SearchComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__search_results_search_results_component__["a" /* SearchResultsComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -574,7 +610,7 @@ var AppModule = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(50);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -599,16 +635,20 @@ var CategoryListComponent = (function () {
         this.activeCategorySub = this.prismStore.activeCategory.subscribe(function (value) {
             _this.activeCategory = value;
         });
+        this.activeSearchSub = this.prismStore.activeSearch.subscribe(function (value) {
+            _this.activeSearch = value;
+        });
     };
     CategoryListComponent.prototype.ngOnDestroy = function () {
         this.categoriesSub.unsubscribe();
         this.activeCategorySub.unsubscribe();
+        this.activeSearchSub.unsubscribe();
     };
     CategoryListComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
             selector: 'prism-category-list',
-            template: __webpack_require__(951),
-            styles: [__webpack_require__(943)]
+            template: __webpack_require__(954),
+            styles: [__webpack_require__(945)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _a) || Object])
     ], CategoryListComponent);
@@ -623,10 +663,39 @@ var CategoryListComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Category; });
+var Category = (function () {
+    function Category() {
+    }
+    Category.fromRecord = function (record) {
+        var model = new Category();
+        model._name = record.name;
+        return model;
+    };
+    Object.defineProperty(Category.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Category.prototype.includes = function (example) {
+        return example.category.name === this.name;
+    };
+    return Category;
+}());
+//# sourceMappingURL=/Users/astrader/ProjectCode/prototypes/prism/src/category.js.map
+
+/***/ }),
+
+/***/ 757:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__example__ = __webpack_require__(396);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(370);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__prism_store_service__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__example__ = __webpack_require__(395);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(371);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__prism_store_service__ = __webpack_require__(50);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ExampleComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -693,8 +762,8 @@ var ExampleComponent = (function () {
     ExampleComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
             selector: 'prism-example',
-            template: __webpack_require__(953),
-            styles: [__webpack_require__(945)]
+            template: __webpack_require__(956),
+            styles: [__webpack_require__(947)]
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _d) || Object])
     ], ExampleComponent);
@@ -705,7 +774,7 @@ var ExampleComponent = (function () {
 
 /***/ }),
 
-/***/ 757:
+/***/ 758:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -751,12 +820,12 @@ var FormatMarkupPipe = (function () {
 
 /***/ }),
 
-/***/ 758:
+/***/ 759:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(50);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PreferencesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -788,8 +857,8 @@ var PreferencesComponent = (function () {
     PreferencesComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
             selector: 'prism-preferences',
-            template: __webpack_require__(955),
-            styles: [__webpack_require__(947)]
+            template: __webpack_require__(958),
+            styles: [__webpack_require__(949)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _a) || Object])
     ], PreferencesComponent);
@@ -800,12 +869,14 @@ var PreferencesComponent = (function () {
 
 /***/ }),
 
-/***/ 759:
+/***/ 760:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__category__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__example__ = __webpack_require__(395);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__category__ = __webpack_require__(756);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PrismModel; });
+
 
 var PrismModel = (function () {
     function PrismModel() {
@@ -815,13 +886,22 @@ var PrismModel = (function () {
         model._title = record.title;
         model._overview = record.overview;
         model._categories = [];
+        model._examples = [];
         model._breakpoints = record.breakpoints;
         if (record.categories) {
             for (var _i = 0, _a = record.categories; _i < _a.length; _i++) {
                 var categoryRecord = _a[_i];
                 if (categoryRecord) {
-                    var category = __WEBPACK_IMPORTED_MODULE_0__category__["a" /* Category */].fromRecord(categoryRecord);
+                    var category = __WEBPACK_IMPORTED_MODULE_1__category__["a" /* Category */].fromRecord(categoryRecord);
                     model._categories.push(category);
+                    if (categoryRecord.examples) {
+                        for (var _b = 0, _c = categoryRecord.examples; _b < _c.length; _b++) {
+                            var exampleRecord = _c[_b];
+                            var example = __WEBPACK_IMPORTED_MODULE_0__example__["a" /* Example */].fromRecord(exampleRecord);
+                            example.category = category;
+                            model._examples.push(example);
+                        }
+                    }
                 }
             }
         }
@@ -855,8 +935,18 @@ var PrismModel = (function () {
         enumerable: true,
         configurable: true
     });
-    PrismModel.prototype.findCategory = function (name) {
+    Object.defineProperty(PrismModel.prototype, "examples", {
+        get: function () {
+            return this._examples;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    PrismModel.prototype.findCategoryByName = function (name) {
         return this.categories.find(function (c) { return c.name == name; });
+    };
+    PrismModel.prototype.findExamples = function (filter) {
+        return this.examples.filter(function (example) { return filter.includes(example); });
     };
     return PrismModel;
 }());
@@ -864,7 +954,7 @@ var PrismModel = (function () {
 
 /***/ }),
 
-/***/ 760:
+/***/ 761:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -881,7 +971,7 @@ var PrismPreferences = (function () {
 
 /***/ }),
 
-/***/ 761:
+/***/ 762:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -920,7 +1010,7 @@ var ResponseTextPipe = (function () {
 
 /***/ }),
 
-/***/ 762:
+/***/ 763:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -958,12 +1048,40 @@ var SafeUrlPipe = (function () {
 
 /***/ }),
 
-/***/ 763:
+/***/ 764:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Search; });
+var Search = (function () {
+    function Search(query) {
+        this._query = query.toLowerCase().trim();
+    }
+    Object.defineProperty(Search.prototype, "query", {
+        get: function () {
+            return this._query;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Search.prototype.includes = function (example) {
+        var substring = this.query.toLowerCase().trim();
+        var string = example.name.toLowerCase();
+        return (string.indexOf(substring) >= 0);
+    };
+    return Search;
+}());
+//# sourceMappingURL=/Users/astrader/ProjectCode/prototypes/prism/src/search.js.map
+
+/***/ }),
+
+/***/ 765:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_store_service__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(176);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -976,31 +1094,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var SearchComponent = (function () {
-    function SearchComponent(prismStore) {
+    function SearchComponent(prismStore, router) {
         this.prismStore = prismStore;
+        this.router = router;
     }
     SearchComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sub = this.prismStore.activeSearch.subscribe(function (value) {
+            if (!value) {
+                _this.searchQuery = null;
+            }
+        });
+    };
+    SearchComponent.prototype.ngOnDestroy = function () {
+        this.sub.unsubscribe();
     };
     SearchComponent.prototype.doSearch = function () {
-        this.prismStore.search(this.searchQuery);
+        this.router.navigate(['/guide/search', this.searchQuery]);
     };
     SearchComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
             selector: 'prism-search',
-            template: __webpack_require__(956),
-            styles: [__webpack_require__(948)]
+            template: __webpack_require__(960),
+            styles: [__webpack_require__(951)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__prism_store_service__["a" /* PrismStoreService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === 'function' && _b) || Object])
     ], SearchComponent);
     return SearchComponent;
-    var _a;
+    var _a, _b;
 }());
 //# sourceMappingURL=/Users/astrader/ProjectCode/prototypes/prism/src/search.component.js.map
 
 /***/ }),
 
-/***/ 764:
+/***/ 766:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1016,7 +1145,7 @@ var environment = {
 
 /***/ }),
 
-/***/ 918:
+/***/ 920:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -1251,36 +1380,22 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 918;
+webpackContext.id = 920;
 
-
-/***/ }),
-
-/***/ 942:
-/***/ (function(module, exports) {
-
-module.exports = ".prism {\n  font-family: Helvetica, Arial, sans-serif; }\n  .prism__title {\n    font-size: 250%; }\n"
-
-/***/ }),
-
-/***/ 943:
-/***/ (function(module, exports) {
-
-module.exports = ".prism-category-list .dropdown-toggle {\n  min-width: 10em; }\n"
 
 /***/ }),
 
 /***/ 944:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".prism {\n  font-family: Helvetica, Arial, sans-serif; }\n  .prism__title {\n    font-size: 250%; }\n"
 
 /***/ }),
 
 /***/ 945:
 /***/ (function(module, exports) {
 
-module.exports = ".prism-example iframe {\n  display: inline-block; }\n"
+module.exports = ".prism-category-list .dropdown-toggle {\n  min-width: 10em; }\n"
 
 /***/ }),
 
@@ -1294,7 +1409,7 @@ module.exports = ""
 /***/ 947:
 /***/ (function(module, exports) {
 
-module.exports = ".prism-preferences {\n  margin: 0.5em auto; }\n"
+module.exports = ".prism-example iframe {\n  display: inline-block; }\n"
 
 /***/ }),
 
@@ -1315,58 +1430,86 @@ module.exports = ""
 /***/ 950:
 /***/ (function(module, exports) {
 
-module.exports = "<main class=\"prism\">\n\n\t<router-outlet></router-outlet>\n\n</main>\n"
+module.exports = ""
 
 /***/ }),
 
 /***/ 951:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"prism-category-list\">\n\n\t<div class=\"btn-group\" dropdown>\n\t\t<button id=\"category-selector-button\" type=\"button\" class=\"btn btn-primary\" dropdownToggle>\n\t\t\t{{activeCategory?.name}}\n\t\t\t<ng-container *ngIf=\"!activeCategory\">Overview</ng-container>\n\t\t\t<span class=\"caret\"></span>\n\t\t</button>\n\t\t<ul dropdownMenu role=\"menu\" aria-labelledby=\"category-selector-button\">\n\t\t\t<li role=\"menuitem\"\n\t\t\t\t[ngClass]=\"{'disabled': !activeCategory}\"\n\t\t\t>\n\t\t\t\t<a class=\"dropdown-item\"\n\t\t\t\t   routerLink=\"/guide/overview\"\n\t\t\t\t>Overview</a>\n\t\t\t</li>\n\t\t\t<li class=\"divider dropdown-divider\"></li>\n\t\t\t<li role=\"menuitem\" *ngFor=\"let category of categories\"\n\t\t\t\t[ngClass]=\"{'disabled': category === activeCategory}\"\n\t\t\t>\n\t\t\t\t<a class=\"dropdown-item\"\n\t\t\t\t   routerLink=\"/guide/category/{{category.name}}\"\n\t\t\t\t   *ngIf=\"category\"\n\t\t\t\t>{{category.name}}</a>\n\t\t\t</li>\n\t\t</ul>\n\t</div>\n\n</div>\n"
+module.exports = ""
 
 /***/ }),
 
 /***/ 952:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"prism-category\">\n\n\t<h2>{{activeCategory?.name}}</h2>\n\n\t<ng-container *ngIf=\"activeCategory\">\n\t\t<prism-example *ngFor=\"let example of activeCategory.examples\"\n\t\t\t\t\t   [example]=\"example\"></prism-example>\n\t</ng-container>\n\n</div>\n"
+module.exports = ".prism-style-guide .prism-control {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0.5em auto; }\n"
 
 /***/ }),
 
 /***/ 953:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"prism-example\" *ngIf=\"example\">\n\n\t<h3 class=\"bg-primary\">{{example.name}}</h3>\n\n\t<div [innerHTML]=\"description | async | responseText\"\n\t\t *ngIf=\"preferences.showingNotes\"\n\t></div>\n\n\t<pre [innerHTML]=\"source | async | responseText | formatMarkup\"\n\t\t *ngIf=\"preferences.showingSource\"\n\t></pre>\n\n\t<ng-container *ngIf=\"example.sourceUrl\">\n\t\t<iframe [src]=\"example.sourceUrl | safeUrl\"\n\t\t\t\twidth=\"100%\"\n\t\t></iframe>\n\t\t<ng-container *ngIf=\"model.breakpoints && preferences.showingBreakpoints\">\n\t\t\t<iframe [src]=\"example.sourceUrl | safeUrl\"\n\t\t\t\t\t*ngFor=\"let breakpoint of model.breakpoints\"\n\t\t\t\t\t[width]=\"breakpoint\"\n\t\t\t></iframe>\n\t\t</ng-container>\n\t</ng-container>\n\n</div>\n"
+module.exports = "<main class=\"prism\">\n\n\t<router-outlet></router-outlet>\n\n</main>\n"
 
 /***/ }),
 
 /***/ 954:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"prism-overview\">\n\t<h2>Overview</h2>\n\n\t{{model.overview}}\n\n\t<ul class=\"nav nav-pills nav-stacked\">\n\t\t<li *ngFor=\"let category of model.categories\">\n\t\t\t<a routerLink=\"/guide/category/{{category.name}}\">{{category.name}}</a>\n\t\t</li>\n\t</ul>\n\n</div>\n"
+module.exports = "<div class=\"prism-category-list\">\n\n\t<div class=\"btn-group\" dropdown>\n\t\t<button id=\"category-selector-button\" type=\"button\" class=\"btn btn-primary\" dropdownToggle>\n\t\t\t<ng-container *ngIf=\"activeCategory\">{{activeCategory.name}}</ng-container>\n\t\t\t<ng-container *ngIf=\"activeSearch\">&quot;{{activeSearch.query}}&quot;</ng-container>\n\t\t\t<ng-container *ngIf=\"!activeCategory && !activeSearch\">Overview</ng-container>\n\t\t\t<span class=\"caret\"></span>\n\t\t</button>\n\t\t<ul dropdownMenu role=\"menu\" aria-labelledby=\"category-selector-button\">\n\t\t\t<li role=\"menuitem\"\n\t\t\t\t[ngClass]=\"{'disabled': !activeCategory}\"\n\t\t\t>\n\t\t\t\t<a class=\"dropdown-item\"\n\t\t\t\t   routerLink=\"/guide/overview\"\n\t\t\t\t>Overview</a>\n\t\t\t</li>\n\t\t\t<li class=\"divider dropdown-divider\"></li>\n\t\t\t<li role=\"menuitem\" *ngFor=\"let category of categories\"\n\t\t\t\t[ngClass]=\"{'disabled': category === activeCategory}\"\n\t\t\t>\n\t\t\t\t<a class=\"dropdown-item\"\n\t\t\t\t   routerLink=\"/guide/category/{{category.name}}\"\n\t\t\t\t   *ngIf=\"category\"\n\t\t\t\t>{{category.name}}</a>\n\t\t\t</li>\n\t\t</ul>\n\t</div>\n\n</div>\n"
 
 /***/ }),
 
 /***/ 955:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"prism-preferences\">\n\t<div class=\"btn-group\">\n\n\t\t<label class=\"btn btn-default\" btnCheckbox\n\t\t\t   [(ngModel)]=\"preferences.showingNotes\"\n\t\t\t   (click)=\"update()\"\n\t\t>Notes</label>\n\n\t\t<label class=\"btn btn-default\" btnCheckbox\n\t\t\t   [(ngModel)]=\"preferences.showingSource\"\n\t\t\t   (click)=\"update()\"\n\t\t>Source</label>\n\n\t\t<label class=\"btn btn-default\" btnCheckbox\n\t\t\t   [(ngModel)]=\"preferences.showingBreakpoints\"\n\t\t\t   (click)=\"update()\"\n\t\t\t   >Breakpoints</label>\n\n\t</div>\n</div>\n"
+module.exports = "<div class=\"prism-category\">\n\n\t<h2>{{activeCategoryName | async}}</h2>\n\n\t<ng-container *ngIf=\"activeExamples | async\">\n\t\t<prism-example *ngFor=\"let example of activeExamples | async\"\n\t\t\t\t\t   [example]=\"example\"></prism-example>\n\t</ng-container>\n\n</div>\n"
 
 /***/ }),
 
 /***/ 956:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"search\">\n\tSearch:\n\t<input type=\"text\" [(ngModel)]=\"searchQuery\"\n\t\t   (change)=\"doSearch()\"\n\t/>\n</div>"
+module.exports = "<div class=\"prism-example\" *ngIf=\"example\">\n\n\t<h3 class=\"bg-primary\">{{example.name}}</h3>\n\n\t<div [innerHTML]=\"description | async | responseText\"\n\t\t *ngIf=\"preferences.showingNotes\"\n\t></div>\n\n\t<pre [innerHTML]=\"source | async | responseText | formatMarkup\"\n\t\t *ngIf=\"preferences.showingSource\"\n\t></pre>\n\n\t<ng-container *ngIf=\"example.sourceUrl\">\n\t\t<iframe [src]=\"example.sourceUrl | safeUrl\"\n\t\t\t\twidth=\"100%\"\n\t\t></iframe>\n\t\t<ng-container *ngIf=\"model.breakpoints && preferences.showingBreakpoints\">\n\t\t\t<iframe [src]=\"example.sourceUrl | safeUrl\"\n\t\t\t\t\t*ngFor=\"let breakpoint of model.breakpoints\"\n\t\t\t\t\t[width]=\"breakpoint\"\n\t\t\t></iframe>\n\t\t</ng-container>\n\t</ng-container>\n\n</div>\n"
 
 /***/ }),
 
 /***/ 957:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"prism-style-guide\">\n\n\t<h1>{{model.title}}</h1>\n\n\t<prism-preferences></prism-preferences>\n\n\t<prism-category-list></prism-category-list>\n\n\t<prism-search></prism-search>\n\n\t<router-outlet></router-outlet>\n\n</div>\n"
+module.exports = "<div class=\"prism-overview\">\n\t<h2>Overview</h2>\n\n\t{{model.overview}}\n\n\t<ul class=\"nav nav-pills nav-stacked\">\n\t\t<li *ngFor=\"let category of model.categories\">\n\t\t\t<a routerLink=\"/guide/category/{{category.name}}\">{{category.name}}</a>\n\t\t</li>\n\t</ul>\n\n</div>\n"
+
+/***/ }),
+
+/***/ 958:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"prism-preferences\">\n\t<div class=\"btn-group\">\n\n\t\t<label class=\"btn btn-default\" btnCheckbox\n\t\t\t   [(ngModel)]=\"preferences.showingNotes\"\n\t\t\t   (click)=\"update()\"\n\t\t>Notes</label>\n\n\t\t<label class=\"btn btn-default\" btnCheckbox\n\t\t\t   [(ngModel)]=\"preferences.showingSource\"\n\t\t\t   (click)=\"update()\"\n\t\t>Source</label>\n\n\t\t<label class=\"btn btn-default\" btnCheckbox\n\t\t\t   [(ngModel)]=\"preferences.showingBreakpoints\"\n\t\t\t   (click)=\"update()\"\n\t\t\t   >Breakpoints</label>\n\n\t</div>\n</div>\n"
+
+/***/ }),
+
+/***/ 959:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"prism-search-results\">\n\n\t<h2>Searching for &quot;{{query | async}}&quot;</h2>\n\n\t<ng-container *ngIf=\"examples | async\">\n\t\t<prism-example *ngFor=\"let example of examples | async\"\n\t\t\t\t\t   [example]=\"example\"></prism-example>\n\t</ng-container>\n\n</div>\n"
+
+/***/ }),
+
+/***/ 960:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"prism-search\">\n\t<div class=\"input-group\">\n\t<span class=\"input-group-btn\">\n\t\t<button class=\"btn btn-default\">Go</button>\n\t</span>\n\t\t<input type=\"text\"\n\t\t\t   class=\"form-control\"\n\t\t\t   placeholder=\"Search...\"\n\t\t\t   [(ngModel)]=\"searchQuery\"\n\t\t\t   (change)=\"doSearch()\"\n\t\t/>\n\t</div>\n</div>\n"
+
+/***/ }),
+
+/***/ 961:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"prism-style-guide\">\n\n\t<h1>{{model.title}}</h1>\n\n\t<prism-preferences class=\"prism-control\"></prism-preferences>\n\n\t<prism-category-list class=\"prism-control\"></prism-category-list>\n\n\t<prism-search class=\"prism-control\"></prism-search>\n\n\t<router-outlet></router-outlet>\n\n</div>\n"
 
 /***/ })
 
-},[1222]);
+},[1226]);
 //# sourceMappingURL=main.bundle.map
